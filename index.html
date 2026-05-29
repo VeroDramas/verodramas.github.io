@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>VERO SÁNCHEZ — Diseñadora que no pasa desapercibida</title>
+<title>Tu Nombre — Diseñadora que no pasa desapercibida</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=Syne+Mono&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -81,11 +81,55 @@ nav{
 
 /* HERO */
 .hero{
-  min-height:100vh;padding:120px 2.5rem 4rem;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
+  min-height:100vh;padding:0;
+  display:grid;grid-template-columns:1fr 1fr;
   position:relative;overflow:hidden;
 }
+.hero-left{
+  padding:120px 2.5rem 4rem;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  position:relative;z-index:1;
+}
+.hero-right{
+  position:relative;overflow:hidden;
+  background:#111;
+}
+.hero-right img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  display:block;
+  filter:grayscale(20%) contrast(1.05);
+  transition:transform 0.6s ease;
+}
+.hero-right:hover img{transform:scale(1.03)}
+/* Overlay con acento de color encima de la foto */
+.hero-right::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,255,0,0.08) 0%,transparent 60%),
+             linear-gradient(to right,rgba(10,10,10,0.5) 0%,transparent 40%);
+  pointer-events:none;z-index:1;
+}
+/* Etiqueta flotante sobre la foto */
+.hero-img-label{
+  position:absolute;bottom:2rem;left:2rem;z-index:2;
+  font-family:'Syne Mono',monospace;font-size:0.62rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--acid);border:1px solid var(--acid);
+  padding:0.35rem 0.8rem;background:rgba(10,10,10,0.6);
+  backdrop-filter:blur(4px);
+}
+/* Placeholder cuando no hay imagen */
+.hero-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:1rem;color:rgba(240,237,230,0.15);
+  font-family:'Syne Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.1em;text-align:center;padding:2rem;
+  border-left:1px solid var(--border);
+}
+.hero-placeholder svg{opacity:0.2}
 .hero-noise{
   position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
@@ -238,7 +282,7 @@ nav{
   transition:color 0.2s;
 }
 .project:hover .project-num{color:var(--acid)}
-.project-info{}
+.project-info{display:flex;flex-direction:column;justify-content:center;}
 .project-cat{
   font-family:'Syne Mono',monospace;font-size:0.62rem;
   letter-spacing:0.12em;text-transform:uppercase;
@@ -401,7 +445,9 @@ footer p{
   .nav-links{gap:1.2rem}
   .nav-available{display:none}
   .nav-links li:nth-child(n+3){display:none}
-  .hero{padding:100px 1.5rem 3rem;min-height:100svh}
+  .hero{grid-template-columns:1fr;min-height:100svh}
+  .hero-left{padding:100px 1.5rem 3rem;justify-content:flex-end}
+  .hero-right{min-height:55vw;max-height:280px;border-left:none;border-top:1px solid var(--border)}
   .hero-title{font-size:clamp(4rem,20vw,6rem)}
   .hero-sub{flex-direction:column;align-items:flex-start;gap:1.5rem}
   .hero-desc{max-width:100%}
@@ -450,23 +496,49 @@ footer p{
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-noise"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-tag">✦ Ilustradora · Diseñadora Gráfica · UX/UI</div>
-  <h1 class="hero-title">
-    <span class="stroke">DISEÑO</span><br>
-    <span class="acid">SIN</span><br>
-    <span class="pink">FILTROS</span>
-  </h1>
-  <div class="hero-sub">
-    <p class="hero-desc">
-      Creo cosas bonitas que también funcionan. 3 años convirtiendo ideas en diseños que paran el scroll, venden y se recuerdan.
-    </p>
-    <a href="#trabajo" class="hero-cta">
-      Ver mi trabajo ↗
-    </a>
+  <!-- COLUMNA IZQUIERDA -->
+  <div class="hero-left">
+    <div class="hero-noise"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-tag">✦ Ilustradora · Diseñadora Gráfica · UX/UI</div>
+    <h1 class="hero-title">
+      <span class="stroke">DISEÑO</span><br>
+      <span class="acid">SIN</span><br>
+      <span class="pink">FILTROS</span>
+    </h1>
+    <div class="hero-sub">
+      <p class="hero-desc">
+        Creo cosas bonitas que también funcionan. 3 años convirtiendo ideas en diseños que paran el scroll, venden y se recuerdan.
+      </p>
+      <a href="#trabajo" class="hero-cta">
+        Ver mi trabajo ↗
+      </a>
+    </div>
+    <div class="scroll-hint">Scroll para explorar ↓</div>
   </div>
-  <div class="scroll-hint">Scroll para explorar ↓</div>
+
+  <!-- COLUMNA DERECHA — FOTO -->
+  <!-- 
+    CÓMO AÑADIR TU FOTO:
+    1. Sube tu imagen a GitHub en la carpeta /img/ (ver guía abajo)
+    2. Cambia src="img/foto-hero.jpg" por el nombre de tu archivo
+    3. Borra el bloque hero-placeholder (las 6 líneas de abajo)
+    4. Descomenta la línea <img ...> quitando las flechas de comentario
+  -->
+  <div class="hero-right">
+    <!-- <img src="img/foto-hero.jpg" alt="Tu Nombre — Diseñadora" loading="eager"> -->
+    <!-- <div class="hero-img-label">Tu Nombre — Diseñadora</div> -->
+
+    <!-- PLACEHOLDER: borra este bloque cuando subas tu foto -->
+    <div class="hero-placeholder">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="40" height="40" rx="2" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="17" cy="18" r="4" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M4 34l10-8 8 6 8-10 14 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <span>Añade aquí tu foto<br>Sigue la guía ↓</span>
+    </div>
+  </div>
 </section>
 
 
